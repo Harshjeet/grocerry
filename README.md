@@ -1,8 +1,4 @@
-Certainly! Here's a simple README.md file for your GitHub repository:
 
----
-
-# Your App Name
 
 Welcome to My grocerry app.! This is a Python web application for managing groceries. The application includes features such as user authentication, product management, and a shopping cart.
 
