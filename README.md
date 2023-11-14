@@ -1,6 +1,6 @@
 
 
-Welcome to My grocerry app.! This is a Python web application for managing groceries. The application includes features such as user authentication, product management, and a shopping cart.
+Welcome to My grocerry app.! This is a Python web application Using `Flask` and `SQLite` for managing groceries. The application includes features such as user authentication, product management, and a shopping cart.
 
 ## Getting Started
 
