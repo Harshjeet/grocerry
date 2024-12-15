@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<h1>Add Product</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label }} {{ form.name(size=20, class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.price.label }} {{ form.price(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.quantity.label }} {{ form.quantity(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.image.label }} {{ form.image(class_='form-control-file') }}
+    </div>
+    <div class="form-group">
+        {{ form.category.label }} {{ form.category(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.description.label }} {{ form.description(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.manufacture_date.label }} {{ form.manufacture_date(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.expiry_date.label }} {{ form.expiry_date(class_='form-control') }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+{% endblock %}

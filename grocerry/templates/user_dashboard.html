@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}User-dashboard | {% endblock %}
+{% block content %}
+<h1>User-dashboard</h1>
+<h1>Welcome, {{ name.name }}!</h1>
+<h2>Product List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Manufacture Date</th>
+            <th>Expiry Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td><img src="{{ url_for('static', filename='product_images/' + product.image) }}" alt="{{ product.name }}" class="product-image"></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.manufacture_date }}</td>
+            <td>{{ product.expiry_date }}</td>
+            <td>
+                <a href="{{ url_for('views.add_to_cart', product_id=product.id, quantity=1) }}" class="btn btn-primary">Add to Cart</a>
+                <a href="{{ url_for('views.buy') }}" class="btn btn-primary">buy now</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

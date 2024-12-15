@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links" >
+            <li><a href="{{ url_for('views.home') }}">Home</a></li>
+            {% if not current_user.is_authenticated %}
+                <li><a href="{{ url_for('auth.user_login') }}">User Login</a></li>
+                <li><a href="{{ url_for('auth.admin_login') }}">Admin Login</a></li>
+                <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
+            {% endif %}
+            {% if not current_user.role == 'adminRole' and current_user.is_authenticated %}
+                <li><a href="{{ url_for('views.cart') }}">Cart<span class="badge">{{ current_user.carts|length }}</span></a></li>
+                <li><a href="{{ url_for('views.order_history') }}">Order History</a></li>
+            {% endif %}
+            <form action="{{ url_for('views.search_products') }}" method="get">
+                <input type="text" name="query" placeholder="Search products...">
+                <button type="submit">Search</button>
+            </form>
+            
+            {% if current_user.is_authenticated %}
+                {% if current_user.role == 'adminRole' and request.path != url_for('views.admin_dashboard') %} 
+                    <li><a href="{{ url_for('views.admin_dashboard') }}">Admin Dashboard</a></li>
+                {% else %}
+                    {% if current_user.role == 'userRole' and request.path != url_for('views.user_dashboard') %}
+                        <li><a href="{{ url_for('views.user_dashboard') }}">User Dashboard</a></li>
+                    {% endif %}
+                {% endif %}
+
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% endif %}
+
+            <!-- Add more menu items as needed -->
+        </ul>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <div class="user-greeting">
+        {% if current_user.is_authenticated %}
+           <p>Hi, {{ current_user.name }}</p> <!-- Adjust the attribute as per your User model -->
+        {% endif %}
+    </div>
+    
+    <div class="content">
+        {% block content %}
+        {% if products %}
+            <div class="search-results">
+                {% include 'search_results.html' %}
+            </div>
+        {% endif %}
+
+        {% endblock %}
+    </div>
+
+
+    <footer>
+        <p>&copy; {{ current_year }} Your E-Commerce App. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+    
+
+

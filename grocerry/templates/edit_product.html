@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Edit Product | {% endblock %}
+{% block content %}
+<h1>Edit Product</h1>
+<form method="POST">
+    {{ edit_form.hidden_tag() }}
+    <label for="{{ edit_form.name.id }}">Product Name:</label>
+    {{ edit_form.name() }}
+
+    <label for="{{ edit_form.price.id }}">Product Price:</label>
+    {{ edit_form.price() }}
+    
+    <label for="{{ edit_form.quantity.id }}">Product Quantity:</label>
+    {{ edit_form.quantity() }}
+    
+    <label for="{{ edit_form.category.id }}">Product Category:</label>
+    {{ edit_form.category() }}
+    
+    <label for="{{ edit_form.description.id }}">Product Description:</label>
+    {{ edit_form.description() }}
+    <!-- <div class="form-group">
+        {{ edit_form.edit_image.label }} {{ edit_form.edit_image(class_='form-control-file') }}
+    </div> -->
+    <div class="form-group">
+        {{ edit_form.manufacture_date.label }} {{ edit_form.manufacture_date(class_='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ edit_form.expiry_date.label }} {{ edit_form.expiry_date(class_='form-control') }}
+    </div>
+    
+    
+    
+    <input type="submit" value="Update Product">
+</form>
+{% endblock %}

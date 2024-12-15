@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+    <h2>Search Results for "{{ query }}"</h2>
+    <ul>
+        {% if products %}
+        {% for product in products %}
+            <li>
+                <div class="product-item">
+                    <img src="{{ url_for('static', filename='product_images/' + product.image) }}" alt="{{ product.name }} Image">
+                    <div class="product-details">
+                        <h3>{{ product.name }}</h3>
+                        <p>Category: {{ product.category }}</p>
+                        <p>Price: {{ product.price }}</p>
+
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.role == 'userRole' %}
+                                <a href="{{ url_for('views.add_to_cart', product_id=product.id, quantity=quantity) }}">Add to Cart</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        {% else %}
+            <p>No results found for "{{ query }}"</p>
+        {% endif %}
+    </ul>
+{% endblock %}

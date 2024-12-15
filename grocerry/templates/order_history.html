@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Order History{% endblock %}
+{% block content %}
+<h1>Order History</h1>
+<table class="table">
+    <!-- <thead>
+        <tr>
+            <th>Order Date</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+        </tr>
+    </thead> -->
+    <tbody>
+        {% for order_item in order_items %}
+        <thead>
+            <td>ORDER_DATE</td>
+            <td>PRODUCT_NAME</td>
+            <td>QUANTITY</td>
+            <td>PRICE</td>
+            <td>TOTAL_PRICE</td>
+
+        </thead>
+        <tr>
+            <td>{{ order_item.order.order_date }}</td>
+            <td>{{ order_item.product.name }}</td>
+            <td>{{ order_item.quantity }}</td>
+            
+            <td>{{ order_item.item_price }}</td>
+            <td>{{ order_item.item_price * order_item.quantity }}</td>
+        </tr>
+        <br>
+        <br>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

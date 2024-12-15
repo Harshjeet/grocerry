@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Recent Purchases{% endblock %}
+{% block content %}
+<h1>Recent Purchases</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Date</th>
+            <!-- <th>Image</th> -->
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order_item in recent_purchases %}
+        <tr>
+            <td>{{ order_item.order.order_date }}</td>
+            {% if order_item.product.image %}
+            <td><img src="{{ url_for('static', filename='product_images/' + order_item.product.image) }}" alt="{{ order_item.product.name }}" class="product-image"></td>
+            {% endif %}
+            <td>{{ order_item.product.name }}</td>
+            <td>{{ order_item.item_price }}</td>
+            <td>{{ order_item.quantity }}</td>
+            <td>{{ order_item.item_price * order_item.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
